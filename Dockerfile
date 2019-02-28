@@ -20,10 +20,16 @@ RUN apt-get update && \
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 RUN update-ca-certificates -f && export JAVA_HOME
 
-# install pip2.7 & upgrade to a latest version
-# use pip2.7 & python2.7 only
 
-RUN sudo apt install python-pip && pip2 install --upgrade pip
+RUN apt-get install -y python2.7
+RUN apt-get install -y python-pip && pip2 install --upgrade pip  && pip2.7 --version
+RUN pip2.7 install numpy pyyaml
+RUN pip2.7 install https://download.pytorch.org/whl/cu90/torch-0.4.0-cp27-cp27mu-linux_x86_64.whl
+RUN python2.7 -c "import torch; print (torch.__version__)"
+RUN pip2.7 install torchvision
+RUN pip2.7 install torchtext
+RUN python2.7 -c "import torch; print (torch.__version__)"
+
 
 RUN pip2.7 install Cython && pip2.7 install numpy && pip2.7 install h5py \
     matplotlib \
@@ -32,10 +38,11 @@ RUN pip2.7 install Cython && pip2.7 install numpy && pip2.7 install h5py \
     scikit-image \
     stanfordcorenlp \
     tensorflow \
-    torchtext \
-    torchvision \
     tqdm && python2.7 -c "import nltk; nltk.download('punkt')"
 
+RUN pip2.7 install pyyaml future
+
+RUN apt install -y python-tk
 
 # ----------------------------------------------------------------------------
 # -- download pretrained imagenet weights for resnet-101
