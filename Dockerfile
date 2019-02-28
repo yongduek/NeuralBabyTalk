@@ -20,7 +20,13 @@ RUN apt-get update && \
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 RUN update-ca-certificates -f && export JAVA_HOME
 
-RUN pip install Cython && pip install h5py \
+# install pip2.7 & upgrade to a latest version
+# use pip2.7 & python2.7 only
+
+RUN sudo apt install python-pip && pip2 install --upgrade pip
+
+
+RUN pip2.7 install Cython && pip2.7 install h5py \
     matplotlib \
     nltk \
     numpy \
@@ -29,7 +35,7 @@ RUN pip install Cython && pip install h5py \
     stanfordcorenlp \
     tensorflow \
     torchtext \
-    tqdm && python -c "import nltk; nltk.download('punkt')"
+    tqdm && python2.7 -c "import nltk; nltk.download('punkt')"
 
 
 # ----------------------------------------------------------------------------
@@ -76,17 +82,17 @@ RUN mkdir -p /workspace/neuralbabytalk/save && \
     rm coco_nbt_1024.tar.gz
 
 WORKDIR /workspace/neuralbabytalk
-RUN python prepro/prepro_dic_coco.py \
+RUN python2.7 prepro/prepro_dic_coco.py \
     --input_json data/coco/dataset_coco.json \
     --split normal \
     --output_dic_json data/coco/dic_coco.json \
     --output_cap_json data/coco/cap_coco.json && \
-    python prepro/prepro_dic_coco.py \
+    python2.7 prepro/prepro_dic_coco.py \
     --input_json data/coco/dataset_coco.json \
     --split robust \
     --output_dic_json data/robust_coco/dic_coco.json \
     --output_cap_json data/robust_coco/cap_coco.json && \
-    python prepro/prepro_dic_coco.py \
+    python2.7 prepro/prepro_dic_coco.py \
     --input_json data/coco/dataset_coco.json \
     --split noc \
     --output_dic_json data/noc_coco/dic_coco.json \
