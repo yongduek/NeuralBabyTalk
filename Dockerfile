@@ -40,9 +40,9 @@ RUN pip2.7 install Cython && pip2.7 install numpy && pip2.7 install h5py \
     tensorflow \
     tqdm && python2.7 -c "import nltk; nltk.download('punkt')"
 
-RUN pip2.7 install pyyaml future
+RUN pip2.7 install pyyaml future cffi
 
-RUN apt install -y python-tk
+RUN apt install -y python-tk vim
 
 # ----------------------------------------------------------------------------
 # -- download pretrained imagenet weights for resnet-101
