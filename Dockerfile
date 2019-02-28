@@ -33,6 +33,7 @@ RUN pip2.7 install Cython && pip2.7 install numpy && pip2.7 install h5py \
     stanfordcorenlp \
     tensorflow \
     torchtext \
+    torchvision \
     tqdm && python2.7 -c "import nltk; nltk.download('punkt')"
 
 
