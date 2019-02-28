@@ -25,11 +25,9 @@ RUN update-ca-certificates -f && export JAVA_HOME
 
 RUN sudo apt install python-pip && pip2 install --upgrade pip
 
-
-RUN pip2.7 install Cython && pip2.7 install h5py \
+RUN pip2.7 install Cython && pip2.7 install numpy && pip2.7 install h5py \
     matplotlib \
     nltk \
-    numpy \
     pycocotools \
     scikit-image \
     stanfordcorenlp \
